@@ -2,7 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-const FinanceRouter = require('./routes/finance');
+const CashinRouter = require('./routes/cashin');
+const CashoutRouter = require('./routes/cashout');
 
 require('dotenv').config();
 
@@ -14,15 +15,20 @@ app.use(express.json());
 
 // mongodb connection
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true});
+mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false});
 
 const connection = mongoose.connection;
 connection.once('open', () => {
     console.log("MongoDB database connection is established.");
 });
 
-app.use('/finance', FinanceRouter);
+app.get('/', (req, res) => {
+    res.send('ok');
+});
 
 app.listen(port, () => {
     console.log('Node.js server is running.');
 });
+
+app.use('/cashin', CashinRouter);
+app.use('/cashout', CashoutRouter);

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
 const cashinSchema = new Schema({
@@ -13,6 +12,16 @@ const cashinSchema = new Schema({
     amount: {
         type: Number,
         required: true,
+        trim: true
+    },
+
+    datetime: {
+        type: String,
+        trim: true
+    }, 
+
+    comments: {
+        type: String,
         trim: true
     }
 
