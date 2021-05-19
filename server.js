@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const CashinRouter = require('./routes/cashin');
 const CashoutRouter = require('./routes/cashout');
+const CategoryRouter = require('./routes/category');
 
 require('dotenv').config();
 
@@ -32,3 +33,4 @@ app.listen(port, () => {
 
 app.use('/cashin', CashinRouter);
 app.use('/cashout', CashoutRouter);
+app.use('/category', CategoryRouter);

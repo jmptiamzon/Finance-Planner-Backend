@@ -4,7 +4,7 @@ let Cashout = require('../models/cashout.model');
 router.route('/').get((req, res) => {
     Cashout.find()
         .then(cashout => res.json(cashout))
-        .catch(err => res.json('Error: ' + err));
+        .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/addCashout').post((req, res) => {
@@ -13,11 +13,11 @@ router.route('/addCashout').post((req, res) => {
     const datetime = req.body.datetime;
     const comments = req.body.comments;
 
-    const newCashout = new Cashout({category, amount, datetime, comments})
+    const newCashout = new Cashout({category, amount, datetime, comments});
 
     newCashout.save()
         .then(cashout => res.json(cashout))
-        .catch(err => res.json('Error: ' + err));
+        .catch(err => res.status(400).json('Error: ' + err));
 
 });
 
@@ -37,9 +37,9 @@ router.route('/updateCashout/:id').post((req, res) => {
 
             cashout.save()
                 .then(() => res.json(cashout))
-                .catch(err => res.json('Error: ' + err));
+                .catch(err => res.status(400).json('Error: ' + err));
         })
-        .catch(err => res.json('Error: ' + err));
+        .catch(err => res.status(400).json('Error: ' + err));
 
 });
 
